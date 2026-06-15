@@ -110,7 +110,7 @@ const ModuloReloj = (() => {
     document.getElementById('btn-aceptar').addEventListener('click', verificarHora);
 
     iniciarRound();
-    App.hablarVoz('Mueve las manecillas con los botones para poner la hora ');
+    App.hablarVoz('Mueve las manecillas con los botones para poner la hora indicada');
   }
 
   /**
