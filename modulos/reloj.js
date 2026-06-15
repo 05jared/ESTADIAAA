@@ -275,7 +275,7 @@ const ModuloReloj = (() => {
         },
       });
     } else {
-      App.hablarVoz(`¡Casi! La hora correcta es ${horaObjetivo.h}:${String(horaObjetivo.m).padStart(2,'0')} 🕐`);
+      App.hablarVoz(`¡Casi! La hora correcta es ${horaObjetivo.h}:${String(horaObjetivo.m).padStart(2,'0')} `);
       document.getElementById('reloj-feedback').classList.add('anim-shake');
       setTimeout(() => {
         const fb = document.getElementById('reloj-feedback');
