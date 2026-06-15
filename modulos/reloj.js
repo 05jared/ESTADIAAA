@@ -172,7 +172,7 @@ const ModuloReloj = (() => {
     actualizarReloj();
     actualizarFeedback();
 
-    App.hablarVoz(`Pon el reloj en las ${horaStr} 🕐`);
+    App.hablarVoz(`Pon el reloj en las ${horaStr} `);
   }
 
   /**
