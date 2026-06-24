@@ -14,6 +14,8 @@ const SCREENS = {
   tienda:     { id: 'screen-tienda',     init: () => ModuloTienda.init() },
   clasifica:  { id: 'screen-clasifica',  init: () => ModuloClasifica.init() },
   secuencias: { id: 'screen-secuencias', init: () => ModuloSecuencias.init() },
+  animales: { id: 'screen-animales', init: () => ModuloAnimales.init() },
+  memoria : { id: 'screen-memoria', init : () => ModuloMemoria.init()},
 };
   let pantallaActual = null;
 
@@ -159,7 +161,7 @@ const SCREENS = {
    * Ema habla en voz + burbuja visual.
    * Si soloSiLibre=true y ya está hablando, no interrumpe.
    */
-  function hablarVoz(texto, soloSiLibre = false) {
+function hablarVoz(texto, soloSiLibre = false) {
   const ahora = Date.now();
 
   // evita repetición agresiva
@@ -174,23 +176,30 @@ const SCREENS = {
 
   _synth.cancel();
 
-  const u = new SpeechSynthesisUtterance(texto);
+  setTimeout(() => {
 
-  // 🌿 estilo Montessori: suave, pausado, natural
-  u.lang = 'es-MX';
-  u.rate = 0.78;      // MÁS LENTO (clave Montessori)
-  u.pitch = 1.05;     // menos caricatura, más natural
-  u.volume = 1;
+    texto = formatearTexto(texto); // 🔥 evita que deletree nombres
 
-  if (_vozEma) u.voice = _vozEma;
+    const u = new SpeechSynthesisUtterance(texto);
 
-  u.onstart = () => {
-    // opcional: micro pausa natural antes de hablar
-  };
+    // 🌿 estilo Montessori mejorado
+    u.lang = 'es-MX';
+    u.rate = 0.80 + Math.random() * 0.05;
+    u.pitch = 1;
+    u.volume = 1;
 
-  u.onerror = () => {};
+    if (_vozEma) u.voice = _vozEma;
 
-  _synth.speak(u);
+    u.onerror = () => {};
+
+    _synth.speak(u);
+
+  }, 40); // 🔥 elimina delay
+}
+function formatearTexto(texto) {
+  return texto
+    .toLowerCase()
+    .replace(/\b\w/g, l => l.toUpperCase());
 }
 
   function cancelarVoz() {
@@ -332,10 +341,19 @@ const SCREENS = {
     _inyectarKeyframes();
     _asegurarPantallas();
     _crearEma();
+    _warmUpVoz();
+
     _aplicarTemaAlBody(getTemaGlobal());
     const nombre = localStorage.getItem('nombre_usuario');
     navigate(nombre ? 'home' : 'bienvenida');
   }
+  function _warmUpVoz() {
+  if (!_synth) return;
+
+  const u = new SpeechSynthesisUtterance('');
+  u.volume = 0;
+  _synth.speak(u);
+}
   function _asegurarPantallas() {
   const main = document.getElementById('app');
   if (!main) return;

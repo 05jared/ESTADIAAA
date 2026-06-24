@@ -53,6 +53,15 @@ const ModuloInicio = (() => {
     desc: 'Descubre el patrón correcto',
     icon: '🔢',
     },
+
+    { id: 'animales', 
+      nombre: 'Animales', 
+      desc: '¿Qué animal es este?', icon: '🐘'
+    },
+    { id: 'memoria', 
+      nombre : 'Memoria', 
+      desc:'Encuentra las parejas iguales', icon: '🧠',  
+    },
   ];
 
   const TAREAS = [

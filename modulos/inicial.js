@@ -1,16 +1,11 @@
-/**
- * MÓDULO: MI INICIAL
- * El niño encuentra la letra inicial de su nombre
- */
-
 const ModuloInicial = (() => {
 
-  // Estado
+ 
   let nombreUsuario = '';
   let inicialCorrecta = '';
-  let fase = 1; // 1: elegir letra, 2: ver resultado
+  let fase = 1; 
 
-  // Objetos por letra (emoji + nombre)
+  
   const OBJETOS_POR_LETRA = {
     A: { emoji: '🍎', nombre: 'Manzana' },
     B: { emoji: '🦋', nombre: 'Mariposa' },
@@ -40,9 +35,7 @@ const ModuloInicial = (() => {
     Z: { emoji: '🦓', nombre: 'Zebra' },
   };
 
-  /**
-   * Genera 5 opciones de letras (incluyendo la correcta)
-   */
+
   function generarOpciones(correcta) {
     const todas = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
     const incorrectas = todas.filter(l => l !== correcta);
