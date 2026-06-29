@@ -121,27 +121,6 @@ const ModuloTienda = (() => {
         <!-- Ema vendedora -->
         <div class="tienda-ema-wrap">
           <div class="tienda-ema-avatar" id="tienda-ema-avatar">
-            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" width="100" height="100">
-              <ellipse cx="75" cy="73" rx="15" ry="10" fill="#FF6B35" transform="rotate(-25 75 73)"/>
-              <ellipse cx="81" cy="69" rx="7"  ry="4.5" fill="#FFF0E8" transform="rotate(-25 81 69)"/>
-              <ellipse cx="50" cy="69" rx="27" ry="21" fill="#FF6B35"/>
-              <ellipse cx="50" cy="73" rx="15" ry="12" fill="#FFF0E8"/>
-              <circle cx="50" cy="43" r="26" fill="#FF6B35"/>
-              <polygon points="25,27 16,4  37,20" fill="#FF6B35"/>
-              <polygon points="75,27 84,4  63,20" fill="#FF6B35"/>
-              <polygon points="26,25 20,9  35,21" fill="#FFAAB0"/>
-              <polygon points="74,25 80,9  65,21" fill="#FFAAB0"/>
-              <ellipse cx="50" cy="48" rx="17" ry="15" fill="#FFF0E8"/>
-              <ellipse cx="42" cy="41" rx="4.5" ry="4.5" fill="#1A1A2E"/>
-              <ellipse cx="58" cy="41" rx="4.5" ry="4.5" fill="#1A1A2E"/>
-              <circle  cx="43.5" cy="39.5" r="1.7" fill="white"/>
-              <circle  cx="59.5" cy="39.5" r="1.7" fill="white"/>
-              <ellipse cx="50" cy="51" rx="3.5" ry="2.5" fill="#E85D7A"/>
-              <path d="M45,55 Q50,60 55,55" stroke="#1A1A2E" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-              <ellipse cx="37" cy="50" rx="5" ry="3" fill="#FFB3C6" opacity="0.6"/>
-              <ellipse cx="63" cy="50" rx="5" ry="3" fill="#FFB3C6" opacity="0.6"/>
-              <text x="50" y="74" text-anchor="middle" font-family="'Fredoka One',cursive" font-size="8.5" fill="white">Ema</text>
-            </svg>
           </div>
           <div class="tienda-ema-burbuja visible-burbuja" id="tienda-ema-burbuja">
             ¡Hola! Soy Ema y hoy soy tu vendedora. Toca cualquier juguete para saber más sobre él. 🦊
