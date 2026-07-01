@@ -115,7 +115,7 @@ const SCREENS = {
 
   // Frases de Ema al tocarla — rotan en orden para que siempre sea diferente
   const FRASES_EMA = [
-    '¡Hola! Soy tu amiga Ema.',
+    '¡Hola! Soy tu amigo.',
     '¡Tú puedes lograrlo, yo sé que sí!',
     '¡Sigue así, eres un campeón!',
     '¡Qué bien que estás aprendiendo hoy!',
