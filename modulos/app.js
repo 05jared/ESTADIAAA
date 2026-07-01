@@ -159,20 +159,26 @@ const SCREENS = {
 
   /**
    * Ema habla en voz + burbuja visual.
-   * Si soloSiLibre=true y ya está hablando, no interrumpe.
+   * @param {string} texto
+   * @param {boolean} soloSiLibre  Si ya está hablando, no interrumpe (para errores/feedback rápido)
+   * @param {function} onEnd       Callback que se ejecuta cuando la frase TERMINA de decirse completa.
+   *                               Úsalo en vez de un setTimeout adivinado para encadenar pasos.
    */
-function hablarVoz(texto, soloSiLibre = false) {
+function hablarVoz(texto, soloSiLibre = false, onEnd = null) {
   const ahora = Date.now();
 
   // evita repetición agresiva
-  if (texto === _lastTexto && ahora - _lastTs < 400) return;
+  if (texto === _lastTexto && ahora - _lastTs < 400) {
+    if (onEnd) onEnd();
+    return;
+  }
   _lastTexto = texto;
   _lastTs = ahora;
 
   mascotaHabla(texto);
 
-  if (!_synth) return;
-  if (soloSiLibre && _synth.speaking) return;
+  if (!_synth) { if (onEnd) onEnd(); return; }
+  if (soloSiLibre && _synth.speaking) { if (onEnd) onEnd(); return; }
 
   _synth.cancel();
 
@@ -180,17 +186,16 @@ function hablarVoz(texto, soloSiLibre = false) {
 
     texto = formatearTexto(texto); // 🔥 evita que deletree nombres
 
-    const u = new SpeechSynthesisUtterance(texto);
-
-    // 🌿 estilo Montessori mejorado
+      const u = new SpeechSynthesisUtterance(texto);
     u.lang = 'es-MX';
-    u.rate = 0.80 + Math.random() * 0.05;
-    u.pitch = 1;
+    u.rate = 0.92;
+    u.pitch = 1.25; 
     u.volume = 1;
 
     if (_vozEma) u.voice = _vozEma;
 
-    u.onerror = () => {};
+    u.onerror = () => { if (onEnd) onEnd(); };
+    u.onend   = () => { if (onEnd) onEnd(); };
 
     _synth.speak(u);
 

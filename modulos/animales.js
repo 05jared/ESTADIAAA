@@ -109,19 +109,33 @@ const ModuloAnimales = (() => {
     const pista = document.getElementById('animales-pista');
     pista.textContent = correcto.pista;
 
-    // Opciones
+    // Opciones (SOLO TEXTO, sin emoji, para que no se pueda adivinar por la forma)
     const wrap = document.getElementById('animales-opciones');
     wrap.innerHTML = '';
 
     opciones.forEach(animal => {
       const btn = document.createElement('button');
       btn.className = 'animales-opcion';
-      btn.innerHTML = `<span class="opcion-emoji">${animal.emoji}</span><span class="opcion-nombre">${animal.nombre}</span>`;
+      btn.innerHTML = `<span class="opcion-nombre">${animal.nombre}</span>`;
       btn.addEventListener('click', () => elegir(animal, btn));
+
+      // Mantener presionado el botón repite el nombre en voz alta
+      btn.addEventListener('mousedown', () => App.hablarVoz(animal.nombre));
+
       wrap.appendChild(btn);
     });
 
     actualizarProgreso();
+    leerOpciones();
+  }
+
+  // Lee en voz alta el nombre de cada opción disponible, para que el niño
+  // pueda relacionar el animal grande con su nombre sin depender de leer
+  function leerOpciones() {
+    const nombres = opciones.map(a => a.nombre).join(', ');
+    setTimeout(() => {
+      App.hablarVoz(`Las opciones son: ${nombres}`);
+    }, 1800);
   }
 
   function elegir(animal, btnEl) {

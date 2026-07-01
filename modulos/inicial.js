@@ -1,11 +1,11 @@
 const ModuloInicial = (() => {
 
- 
+
   let nombreUsuario = '';
   let inicialCorrecta = '';
-  let fase = 1; 
+  let fase = 1;
 
-  
+
   const OBJETOS_POR_LETRA = {
     A: { emoji: '🍎', nombre: 'Manzana' },
     B: { emoji: '🦋', nombre: 'Mariposa' },
@@ -29,10 +29,10 @@ const ModuloInicial = (() => {
     T: { emoji: '🐢', nombre: 'Tortuga' },
     U: { emoji: '🦄', nombre: 'Unicornio' },
     V: { emoji: '🎻', nombre: 'Violín' },
-    W: { emoji: '🍉', nombre: 'Watermelon' },
-    X: { emoji: '🎮', nombre: 'Xbox' },
+    W: { emoji: '🍉', nombre: 'Sandía' },
+    X: { emoji: '🎮', nombre: 'Videojuego' },
     Y: { emoji: '🏅', nombre: 'Yate' },
-    Z: { emoji: '🦓', nombre: 'Zebra' },
+    Z: { emoji: '🦓', nombre: 'Cebra' },
   };
 
 
@@ -113,7 +113,7 @@ const ModuloInicial = (() => {
 
     // Mascota
     setTimeout(() => {
-      App.hablarVoz(`¡Encuentra la letra ${inicialCorrecta}, que es la inicial de "${nombreUsuario}"! 🦊`);
+      App.hablarVoz(`¡Encuentra la letra ${inicialCorrecta}, que es la inicial de "${nombreUsuario}"!`);
     }, 600);
   }
 
@@ -136,24 +136,27 @@ const ModuloInicial = (() => {
         b.style.opacity = b === btn ? '1' : '0.4';
       });
 
-      // Mostrar resultado
-      setTimeout(() => mostrarResultado(), 700);
-
       // Sumar puntos
       App.sumarPuntos(10);
       App.marcarTareaCompletada('inicial');
-      App.hablarVoz(`¡Excelente! La ${inicialCorrecta} es tu inicial 🎉`);
+
+      // FUNCIONAL: primero felicita, y SOLO cuando termina de decirlo
+      // (onEnd, no un setTimeout adivinado) muestra el resultado y
+      // entonces narra el animal/objeto asociado a la letra.
+      App.hablarVoz(`¡Excelente! La ${inicialCorrecta} es tu inicial`, false, () => {
+        mostrarResultado();
+      });
 
     } else {
       // Incorrecta
       btn.classList.add('incorrecta');
       setTimeout(() => btn.classList.remove('incorrecta'), 500);
-      App.hablarVoz(`¡Esa no es! Busca la ${inicialCorrecta} 🔍`);
+      App.hablarVoz(`¡Esa no es! Busca la ${inicialCorrecta}`, true);
     }
   }
 
   /**
-   * Muestra el bloque de resultado
+   * Muestra el bloque de resultado y NARRA el objeto asociado a la letra
    */
   function mostrarResultado() {
     const objeto = OBJETOS_POR_LETRA[inicialCorrecta] || { emoji: '⭐', nombre: 'Especial' };
@@ -169,6 +172,11 @@ const ModuloInicial = (() => {
 
     // Scroll suave hacia resultado
     resultadoWrap.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+    // Narrar el objeto: "La J es como Jirafa"
+    setTimeout(() => {
+      App.hablarVoz(`La ${inicialCorrecta} es como ${objeto.nombre}`);
+    }, 350);
   }
 
   return { init };
