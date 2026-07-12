@@ -167,6 +167,7 @@ const ModuloInicio = (() => {
           <span class="home-puntos__icon">🪙</span>
           <span class="home-puntos__valor">${puntos}</span>
         </div>
+        
       </div>
 
       <div class="home-grid">
